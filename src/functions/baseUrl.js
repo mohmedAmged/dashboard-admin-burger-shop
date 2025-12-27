@@ -1,0 +1,1 @@
+export const baseURL = 'https://node-js-burger-shop-backend.vercel.app/api/v1';

@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;600;700&display=swap");
+@import "tailwindcss";
+
+
+@font-face {
+  font-family: "Modern Negra";
+  src: url("/fonts/Modern Negra Demo.ttf") format("truetype");
+}
+
+@theme {
+  --color-yellow: #f7ac5c;
+  --color-white-100: #efefef;
+  --font-sans: "Poppins", sans-serif;
+  --font-modern-negra: "Bebas Neue", sans-serif;
+  --font-serif: "Poppins", serif;
+  --color-white: #fff2d4;
+}
+
+html,
+body {
+  width: 100%;
+  background-color: black;
+  color: #fff2d4;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+@utility radial-gradient {
+  background: radial-gradient(
+    circle at center,
+    #f7ac5c 0%,
+    #000000 50%,
+    transparent 100%
+  );
+}
+@layer components{
+    main {
+    @apply w-full overflow-x-hidden;
+  }
+}
