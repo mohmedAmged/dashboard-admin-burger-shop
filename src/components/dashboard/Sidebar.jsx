@@ -1,17 +1,31 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import { useAuthStore } from '../../store/Auth.store';
+import Cookies from 'js-cookie'
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen, onClose }) {
     const [productsOpen, setProductsOpen] = useState(false);
     const location = useLocation();
+    const {signOut} = useAuthStore();
 
     return (
-        <aside className="fixed top-0 left-0 w-64 h-full min-h-screen bg-black/50 border-r border-yellow/20 flex flex-col p-6 backdrop-blur-md z-50">
-            <h2 className="text-3xl font-modern-negra text-yellow mb-10 text-center tracking-wide">Burger Shop</h2>
+        <aside className={`fixed top-0 left-0 w-64 h-full min-h-screen bg-black/90 lg:bg-black/50 border-r border-yellow/20 flex flex-col p-6 backdrop-blur-md z-50 transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}>
+            <div className="flex justify-between items-center mb-10">
+                <h2 className="text-3xl font-modern-negra text-yellow tracking-wide lg:text-center w-full">Burger Shop</h2>
+                <button
+                    onClick={onClose}
+                    className="lg:hidden text-white/50 hover:text-white transition-colors"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-8">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
 
             <nav className="flex-1 space-y-4">
                 {/* Users */}
                 <NavLink
+                    onClick={() => window.innerWidth < 1024 && onClose()}
                     to="/users"
                     className={({ isActive }) =>
                         `flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ${isActive ? 'bg-yellow text-black font-bold shadow-[0_0_20px_rgba(247,172,92,0.4)]' : 'text-white hover:bg-white/10'}`
@@ -45,12 +59,14 @@ export default function Sidebar() {
                             <NavLink
                                 to="/products"
                                 end
+                                onClick={() => window.innerWidth < 1024 && onClose()}
                                 className={({ isActive }) => `block py-2 text-sm font-sans transition-colors ${isActive ? 'text-yellow font-bold' : 'text-white/70 hover:text-white'}`}
                             >
                                 All Products
                             </NavLink>
                             <NavLink
                                 to="/products/create"
+                                onClick={() => window.innerWidth < 1024 && onClose()}
                                 className={({ isActive }) => `block py-2 text-sm font-sans transition-colors ${isActive ? 'text-yellow font-bold' : 'text-white/70 hover:text-white'}`}
                             >
                                 Create Product
@@ -62,6 +78,7 @@ export default function Sidebar() {
                 {/* Orders */}
                 <NavLink
                     to="/orders"
+                    onClick={() => window.innerWidth < 1024 && onClose()}
                     className={({ isActive }) =>
                         `flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ${isActive ? 'bg-yellow text-black font-bold shadow-[0_0_20px_rgba(247,172,92,0.4)]' : 'text-white hover:bg-white/10'}`
                     }
@@ -79,8 +96,10 @@ export default function Sidebar() {
                 <button
                     className="flex items-center gap-3 text-white/70 hover:text-white w-full font-sans transition-colors cursor-pointer"
                     onClick={() => {
-                        // simple logout
-                        document.cookie = 'token=; Max-Age=0; path=/;'; // clearing dummy cookie if any
+                        signOut();
+                        Cookies.remove('adminToken')
+                        Cookies.remove('adminData');
+
                         window.location.reload();
                     }}
                 >

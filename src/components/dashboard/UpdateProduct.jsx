@@ -1,41 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react'
 import { useProductStore } from '../../store/Products.store';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-export default function CreateProduct() {
-    const navigate = useNavigate()
-    const { createProduct, loading } = useProductStore();
-    const [formData, setFormData] = useState({
-        name: '',
-        title: '',
-        description: '',
-        price: '',
-        currency: 'USD',
-        stock: '',
-        category: '',
-        available: true,
-        image: null
-    });
+export default function UpdateProduct() {
+    const { slug } = useParams();
+    const { getAllProducts, products } = useProductStore();
+    const productChoosen = products?.find((product) => product?.slug === slug);
+    useEffect(() => {
+        getAllProducts()
+    }, [])
+    console.log(productChoosen);
 
+    const { updateProduct, loading } = useProductStore();
+    const navigate = useNavigate();
+    const [formData, setFormData] = React.useState({
+        name: productChoosen?.name,
+        title: productChoosen?.title,
+        description: productChoosen?.description,
+        price: productChoosen?.price,
+        currency: 'EGP',
+        stock: productChoosen?.stock,
+        category: productChoosen?.category,
+        image: productChoosen?.image,
+        available: productChoosen?.available,
+    })
     const handleChange = (e) => {
-        const { name, value, type, checked, files } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: type === 'checkbox' ? checked : type === 'file' ? files[0] : value
-        }));
-    };
-
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        })
+    }
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        await createProduct(formData);
-        navigate('/products')
+        e.preventDefault()
+        await updateProduct(slug, formData);
         console.log(formData);
-    };
+        navigate('/products')
+    }
 
     return (
         <div className="w-full max-w-4xl mx-auto">
             <h2 className="text-2xl md:text-4xl font-modern-negra text-white mb-8 text-center md:text-left">
-                Create <span className="text-yellow">New Product</span>
+                Update <span className="text-yellow">{productChoosen?.name}</span>
             </h2>
 
             <form onSubmit={handleSubmit} className="border border-yellow/20 bg-black/50 rounded-3xl p-8 shadow-lg space-y-6 backdrop-blur-sm">
@@ -162,7 +167,7 @@ export default function CreateProduct() {
                 </div>
 
                 <button type="submit" className="w-full py-4 mt-6 bg-yellow text-black font-bold text-lg rounded-xl hover:opacity-90 hover:scale-[1.01] transition-all cursor-pointer shadow-lg shadow-yellow/20">
-                    {loading ? 'Creating...' : 'Create Product'}
+                    {loading ? 'Updating...' : 'Update Product'}
                 </button>
             </form>
         </div>
