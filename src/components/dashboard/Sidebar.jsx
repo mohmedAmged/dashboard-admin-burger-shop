@@ -5,8 +5,9 @@ import Cookies from 'js-cookie'
 
 export default function Sidebar({ isOpen, onClose }) {
     const [productsOpen, setProductsOpen] = useState(false);
+    const [vouchersOpen, setVouchersOpen] = useState(false);
     const location = useLocation();
-    const {signOut} = useAuthStore();
+    const { signOut } = useAuthStore();
 
     return (
         <aside className={`fixed top-0 left-0 w-64 h-full min-h-screen bg-black/90 lg:bg-black/50 border-r border-yellow/20 flex flex-col p-6 backdrop-blur-md z-50 transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}>
@@ -70,6 +71,44 @@ export default function Sidebar({ isOpen, onClose }) {
                                 className={({ isActive }) => `block py-2 text-sm font-sans transition-colors ${isActive ? 'text-yellow font-bold' : 'text-white/70 hover:text-white'}`}
                             >
                                 Create Product
+                            </NavLink>
+                        </div>
+                    )}
+                </div>
+
+                {/* Vouchers */}
+                <div>
+                    <button
+                        onClick={() => setVouchersOpen(!vouchersOpen)}
+                        className={`w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl transition-all cursor-pointer ${location.pathname.includes('vouchers') ? 'text-yellow font-bold' : 'text-white hover:bg-white/10'}`}
+                    >
+                        <div className="flex items-center gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z" />
+                            </svg>
+                            <span className="font-sans">Vouchers</span>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-4 transition-transform duration-300 ${vouchersOpen || location.pathname.includes('vouchers') ? 'rotate-180' : ''}`}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                        </svg>
+                    </button>
+
+                    {(vouchersOpen || location.pathname.includes('vouchers')) && (
+                        <div className="ml-8 mt-2 space-y-2 border-l border-white/20 pl-4">
+                            <NavLink
+                                to="/vouchers"
+                                end
+                                onClick={() => window.innerWidth < 1024 && onClose()}
+                                className={({ isActive }) => `block py-2 text-sm font-sans transition-colors ${isActive ? 'text-yellow font-bold' : 'text-white/70 hover:text-white'}`}
+                            >
+                                All Vouchers
+                            </NavLink>
+                            <NavLink
+                                to="/vouchers/create"
+                                onClick={() => window.innerWidth < 1024 && onClose()}
+                                className={({ isActive }) => `block py-2 text-sm font-sans transition-colors ${isActive ? 'text-yellow font-bold' : 'text-white/70 hover:text-white'}`}
+                            >
+                                Create Voucher
                             </NavLink>
                         </div>
                     )}

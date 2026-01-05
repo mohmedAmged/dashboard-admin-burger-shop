@@ -178,9 +178,13 @@ export default function OrderDetails() {
                         </div>
 
                         <div className="mt-auto pt-6 border-t border-white/10">
+                        <div className="flex justify-between items-end">
+                                <span className="text-white/50 text-sm font-medium uppercase tracking-wide">Savings Amount</span>
+                                <span className="text-xl font-modern-negra text-green-400 ">-{order?.savings || 0} <span className="text-sm text-green-400">EGP</span></span>
+                            </div>
                             <div className="flex justify-between items-end">
                                 <span className="text-white/50 text-sm font-medium uppercase tracking-wide">Total Amount</span>
-                                <span className="text-3xl font-modern-negra text-yellow">{order.totalPrice} <span className="text-lg text-yellow/50">EGP</span></span>
+                                <span className="text-3xl font-modern-negra text-yellow">{order.totalPriceAfterCode ? order.totalPriceAfterCode : order.totalPrice} <span className="text-lg text-yellow/50">EGP</span></span>
                             </div>
                         </div>
                     </div>

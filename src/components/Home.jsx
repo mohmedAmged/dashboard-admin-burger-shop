@@ -7,6 +7,9 @@ import Users from './dashboard/Users'
 import Orders from './dashboard/Orders'
 import UpdateProduct from './dashboard/UpdateProduct'
 import OrderDetails from './dashboard/OrderDetails'
+import Vouchers from './dashboard/Vouchers'
+import CreateVoucher from './dashboard/CreateVoucher'
+import UpdateVoucher from './dashboard/UpdateVoucher'
 
 export default function Home() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -69,8 +72,14 @@ export default function Home() {
                         <Route path="products" element={<Products />} />
                         <Route path="products/create" element={<CreateProduct />} />
                         <Route path="products/update/:slug" element={<UpdateProduct />} />
+                        <Route path="vouchers" element={<Vouchers />} />
+                        <Route path="vouchers/create" element={<CreateVoucher />} />
+                        <Route path="vouchers/update/:id" element={<UpdateVoucher />} />
                         <Route path="orders" element={<Orders />} />
                         <Route path="orders/:id" element={<OrderDetails />} />
+                        <Route path="vouchers" element={<Vouchers />} />
+                        <Route path="vouchers/create" element={<CreateVoucher />} />
+                        <Route path="vouchers/update/:id" element={<UpdateVoucher />} />
                         {/* Fallback */}
                         <Route path="*" element={<Navigate to="/" replace />} />
                     </Routes>
