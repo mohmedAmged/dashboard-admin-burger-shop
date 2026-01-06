@@ -12,7 +12,9 @@ export default function Sidebar({ isOpen, onClose }) {
     return (
         <aside className={`fixed top-0 left-0 w-64 h-full min-h-screen bg-black/90 lg:bg-black/50 border-r border-yellow/20 flex flex-col p-6 backdrop-blur-md z-50 transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}>
             <div className="flex justify-between items-center mb-10">
-                <h2 className="text-3xl font-modern-negra text-yellow tracking-wide lg:text-center w-full">Burger Shop</h2>
+                <a href='/' className="text-3xl font-modern-negra text-white tracking-wide lg:text-center w-full">
+                    Burger <span className="text-yellow">Shop</span>
+                </a>
                 <button
                     onClick={onClose}
                     className="lg:hidden text-white/50 hover:text-white transition-colors"
