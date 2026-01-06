@@ -53,9 +53,6 @@ export default function Home() {
                         <Route path="products" element={<Products />} />
                         <Route path="products/create" element={<CreateProduct />} />
                         <Route path="products/update/:slug" element={<UpdateProduct />} />
-                        <Route path="vouchers" element={<Vouchers />} />
-                        <Route path="vouchers/create" element={<CreateVoucher />} />
-                        <Route path="vouchers/update/:id" element={<UpdateVoucher />} />
                         <Route path="orders" element={<Orders />} />
                         <Route path="orders/:id" element={<OrderDetails />} />
                         <Route path="vouchers" element={<Vouchers />} />
