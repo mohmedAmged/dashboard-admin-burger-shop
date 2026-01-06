@@ -4,7 +4,6 @@ import { Token } from "./functions/Token"
 import SignIn from "./components/SignIn"
 import Home from "./components/Home"
 function App() {
-  console.log(Token);
   return (
     <>
       <Toaster position="top-right" reverseOrder={false} />

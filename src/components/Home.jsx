@@ -33,7 +33,7 @@ export default function Home() {
 
                 {/* Mobile Header */}
                 <div className="lg:hidden flex items-center justify-between p-4 border-b border-white/10 bg-black/20 backdrop-blur-md sticky top-0 z-30">
-                    <a href='/' className="text-xl font-modern-negra text-white tracking-wide">Burger <span className="text-yellow">Shop</span>
+                    <a href='/' className="text-xl font-modern-negra text-white tracking-wide">Burgro <span className="text-yellow">Shop</span>
                     </a>
                     <button
                         onClick={() => setIsSidebarOpen(true)}
