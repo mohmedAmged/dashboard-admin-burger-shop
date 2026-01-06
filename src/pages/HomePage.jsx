@@ -7,7 +7,6 @@ import {
     Package,
     ChevronRight,
     ArrowUpRight,
-    Loader2
 } from 'lucide-react';
 import {
     XAxis,
@@ -22,6 +21,7 @@ import {
     Cell,
 } from 'recharts';
 import { useDashboardStatsStore } from '../store/DashboardStats.store';
+import Loader from '../utils/Loader';
 
 const COLORS = ['#f7ac5c', '#3b82f6', '#10b981', '#f43f5e', '#8b5cf6'];
 
@@ -34,13 +34,7 @@ export default function HomePage() {
 
     if (loading && !stats) {
         return (
-            <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-6">
-                <Loader2 size={64} className="text-yellow animate-spin" />
-                <h2 className="text-2xl font-modern-negra text-white">Loading Statistics...</h2>
-                <div className="w-64 h-1.5 bg-white/5 rounded-full overflow-hidden border border-white/10">
-                    <div className="h-full bg-yellow animate-loading-bar" />
-                </div>
-            </div>
+            <Loader title="Statistics" />
         );
     }
 

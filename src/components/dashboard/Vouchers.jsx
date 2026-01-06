@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useVoucherStore } from '../../store/Voucher.store';
 import { useNavigate } from 'react-router-dom';
+import Loader from '../../utils/Loader';
 
 const getStatusColor = (status) => {
     switch (status) {
@@ -11,7 +12,7 @@ const getStatusColor = (status) => {
 };
 
 export default function Vouchers() {
-    const { vouchers, getAllVouchers, deleteVoucher } = useVoucherStore();
+    const { vouchers, getAllVouchers, deleteVoucher, loading } = useVoucherStore();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -40,7 +41,8 @@ export default function Vouchers() {
                     Create Voucher
                 </button>
             </div>
-
+            { loading ? <Loader title={"vouchers"}/> :
+                <>
             {/* Desktop Table View */}
             <div className="hidden md:block overflow-hidden rounded-3xl border border-yellow/20 bg-black/50 shadow-lg max-w-[100vw] md:max-w-full">
                 <div className="overflow-x-auto">
@@ -168,6 +170,9 @@ export default function Vouchers() {
                     </div>
                 ))}
             </div>
+                </>
+            }
+            
         </div>
     )
 }

@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useUsersStore } from '../../store/Users.store'
+import Loader from '../../utils/Loader';
 
 export default function Users() {
-    const { getAllUsers, users } = useUsersStore()
+    const { getAllUsers, users, loading } = useUsersStore()
     useEffect(() => {
         getAllUsers()
     }, [getAllUsers])
@@ -12,7 +13,8 @@ export default function Users() {
             <h2 className="text-2xl md:text-4xl font-modern-negra text-white mb-8 text-center md:text-left">
                 Manage <span className="text-yellow">Users</span>
             </h2>
-
+            { loading? <Loader title={"users"}/>:
+            <>
             {/* Desktop Table View */}
             <div className="hidden md:block overflow-hidden rounded-3xl border border-yellow/20 bg-black/50 shadow-lg">
                 <div className="overflow-x-auto">
@@ -60,6 +62,9 @@ export default function Users() {
                     </div>
                 ))}
             </div>
+            </>
+            }
+            
         </div>
     )
 }

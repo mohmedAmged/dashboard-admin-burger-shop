@@ -3,6 +3,7 @@ import { useOrdersStore } from '../../store/Orders.store';
 import { useNavigate } from 'react-router-dom';
 import OrderStatusModal from './OrderStatusModal';
 import toast from 'react-hot-toast';
+import Loader from '../../utils/Loader';
 
 const getStatusColor = (status) => {
     switch (status) {
@@ -16,7 +17,7 @@ const getStatusColor = (status) => {
 };
 
 export default function Orders() {
-    const { orders, getAllOrders, updateOrderStatus } = useOrdersStore();
+    const { orders, getAllOrders, updateOrderStatus, loading } = useOrdersStore();
     const navigate = useNavigate();
     const [orderToUpdate, setOrderToUpdate] = useState(null);
     const [isUpdateOpen, setIsUpdateOpen] = useState(false);
@@ -38,7 +39,11 @@ export default function Orders() {
             <h2 className="text-2xl md:text-4xl font-modern-negra text-white mb-8 text-center md:text-left">
                 Manage <span className="text-yellow">Orders</span>
             </h2>
-
+            {
+                loading ? (
+                    <Loader title="Orders" />
+                ) : (
+                    <>
             {/* Desktop Table View */}
             <div className="hidden md:block overflow-hidden rounded-3xl border border-yellow/20 bg-black/50 shadow-lg max-w-[100vw] md:max-w-full">
                 <div className="overflow-x-auto">
@@ -193,6 +198,8 @@ export default function Orders() {
                 order={orderToUpdate}
                 onUpdate={handleUpdateStatus}
             />
+                    </>
+            )}
         </div>
     )
 }

@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useProductStore } from '../../store/Products.store';
+import Loader from '../../utils/Loader';
 
 
 
 export default function Products() {
     const navigate = useNavigate();
-    const { getAllProducts, products, deleteProduct } = useProductStore()
+    const { getAllProducts, products, deleteProduct, loading } = useProductStore();
+
     useEffect(() => {
         getAllProducts()
     }, [deleteProduct, getAllProducts])
@@ -24,9 +26,9 @@ export default function Products() {
                     Add New Product
                 </button>
             </div>
-
-            {/* Desktop Table View */}
-            {/* Desktop Table View */}
+            { loading ? <Loader title="Products" /> :
+            <>
+             {/* Desktop Table View */}
             <div className="hidden md:block overflow-hidden rounded-3xl border border-yellow/20 bg-black/50 shadow-lg max-w-[100vw] md:max-w-full">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left text-white whitespace-nowrap">
@@ -154,6 +156,9 @@ export default function Products() {
                     </div>
                 ))}
             </div>
+            </>
+            }
+           
         </div>
     )
 }

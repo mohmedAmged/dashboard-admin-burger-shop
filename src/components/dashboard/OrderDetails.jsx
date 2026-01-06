@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useOrdersStore } from '../../store/Orders.store';
 import OrderStatusModal from './OrderStatusModal';
+import Loader from '../../utils/Loader';
 
 const getStatusColor = (status) => {
     switch (status) {
@@ -31,7 +32,7 @@ export default function OrderDetails() {
     };
 
     if (loading) {
-        return <div className="text-white p-10">Loading...</div>;
+        return <Loader title={`Order #${id} Details`} />;
     }
 
     if (!currentOrder) {
