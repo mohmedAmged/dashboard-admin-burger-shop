@@ -62,7 +62,8 @@ export default function Orders() {
                         </thead>
                         <tbody className="divide-y divide-yellow/10 font-sans text-sm">
                             {orders.map((order) => (
-                                <tr key={order?._id} className="hover:bg-white/5 transition-colors">
+                               order?.user !== null && (
+                                 <tr key={order?._id} className="hover:bg-white/5 transition-colors">
                                     <td className="px-6 py-4 font-mono font-bold text-yellow">#{order?._id.slice(0, 6)}...</td>
                                     <td className="px-6 py-4 text-white/60">{new Date(order?.createdAt).toLocaleString()}</td>
                                     <td className="px-6 py-4 font-medium">
@@ -113,6 +114,7 @@ export default function Orders() {
                                         </div>
                                     </td>
                                 </tr>
+                               )
                             ))}
                         </tbody>
                     </table>

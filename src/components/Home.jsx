@@ -16,7 +16,7 @@ export default function Home() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     return (
-        <div className="flex min-h-screen radial-gradient text-white font-sans relative">
+        <div className="flex min-h-screen  text-white font-sans relative">
             {/* Sidebar */}
             <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
 
@@ -29,7 +29,7 @@ export default function Home() {
             )}
 
             {/* Main Content Area */}
-            <div className="flex-1 lg:ml-64 flex flex-col min-h-screen transition-all duration-300 overflow-x-hidden">
+            <div className="flex-1 lg:ml-64 flex flex-col min-h-screen transition-all duration-300 radial-gradient overflow-x-hidden">
 
                 {/* Mobile Header */}
                 <div className="lg:hidden flex items-center justify-between p-4 border-b border-white/10 bg-black/20 backdrop-blur-md sticky top-0 z-30">

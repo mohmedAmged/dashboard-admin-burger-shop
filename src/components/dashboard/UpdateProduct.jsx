@@ -169,6 +169,9 @@ export default function UpdateProduct() {
                 <button type="submit" className="w-full py-4 mt-6 bg-yellow text-black font-bold text-lg rounded-xl hover:opacity-90 hover:scale-[1.01] transition-all cursor-pointer shadow-lg shadow-yellow/20">
                     {loading ? 'Updating...' : 'Update Product'}
                 </button>
+                <button type="button" onClick={() => navigate('/products')} className="w-full  py-3 text-white/50 bg-transparent hover:text-white transition-colors cursor-pointer">
+                        Cancel
+                </button>
             </form>
         </div>
     )
