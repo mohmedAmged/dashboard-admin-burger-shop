@@ -8,7 +8,7 @@ A premium, modern, and highly responsive administrative dashboard for managing a
 
 To explore the dashboard live, use the following credentials:
 
-- **Email**: `mohamedamgad123@gmail.com`
+- **Email**: `admin@gmail.com`
 - **Password**: `123456789`
 
 ---
